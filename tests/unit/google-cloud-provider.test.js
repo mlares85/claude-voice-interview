@@ -27,14 +27,22 @@ describe('Google Cloud Speech Provider', () => {
     // Clear all mocks
     jest.clearAllMocks();
     
-    // Get mock instances
+    // Create mock instances that will be returned by the constructors
+    mockSpeechClient = {
+      recognize: jest.fn()
+    };
+    mockTTSClient = {
+      synthesizeSpeech: jest.fn()
+    };
+    
+    // Get mock constructors and make them return our mock instances
     const { SpeechClient } = require('@google-cloud/speech');
     const { TextToSpeechClient } = require('@google-cloud/text-to-speech');
     
-    mockSpeechClient = new SpeechClient();
-    mockTTSClient = new TextToSpeechClient();
+    SpeechClient.mockImplementation(() => mockSpeechClient);
+    TextToSpeechClient.mockImplementation(() => mockTTSClient);
 
-    // Create provider with API key
+    // Create provider with API key - this will now use our mocked clients
     provider = new GoogleSpeechProvider({
       apiKey: 'test-api-key',
       language: 'en-US'

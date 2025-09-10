@@ -69,11 +69,21 @@ class PythonSpeechService extends EventEmitter {
       }
     });
 
-    // Handle stderr (error messages from Python service)
+    // Handle stderr (messages from Python service)
     this.pythonProcess.stderr.on('data', (data) => {
-      const errorMessage = data.toString();
-      this.logs.errors.push(errorMessage);
-      this.emit('error', errorMessage);
+      const message = data.toString();
+      
+      // Filter out info/warning messages - only emit actual errors
+      const isInfoOrWarning = message.includes('INFO -') || 
+                              message.includes('Warning:') || 
+                              message.includes('Running in mock mode');
+      
+      if (isInfoOrWarning) {
+        this.logs.info.push(message);
+      } else {
+        this.logs.errors.push(message);
+        this.emit('error', message);
+      }
     });
 
     // Handle process exit

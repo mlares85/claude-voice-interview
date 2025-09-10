@@ -100,7 +100,7 @@ describe('Python Speech Service Script', () => {
               isReady: expect.any(Boolean),
               isListening: expect.any(Boolean),
               currentLanguage: expect.any(String),
-              lastError: expect.anything(), // Can be null or error message in mock mode
+              lastError: null, // Should be null in mock mode when no errors
               memoryUsage: expect.any(Number)
             });
             
