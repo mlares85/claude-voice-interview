@@ -37,7 +37,7 @@ class PythonSpeechService extends EventEmitter {
     try {
       const pythonScriptPath = path.join(__dirname, '../python/local_speech_service.py');
       
-      this.pythonProcess = spawn('python', [pythonScriptPath], {
+      this.pythonProcess = spawn('python3', [pythonScriptPath], {
         stdio: ['pipe', 'pipe', 'pipe']
       });
 

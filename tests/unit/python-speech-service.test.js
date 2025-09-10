@@ -37,7 +37,7 @@ describe('Python Speech Service Integration', () => {
     test('should start Python service subprocess', async () => {
       await pythonService.start();
 
-      expect(spawn).toHaveBeenCalledWith('python', [
+      expect(spawn).toHaveBeenCalledWith('python3', [
         expect.stringContaining('local_speech_service.py')
       ], expect.any(Object));
       expect(pythonService.isRunning()).toBe(true);
