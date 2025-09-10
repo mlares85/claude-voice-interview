@@ -1,0 +1,54 @@
+{
+  "name": "claude-voice-interview",
+  "version": "1.0.0",
+  "description": "A voice-enabled wrapper around Claude Code for interactive interview practice",
+  "main": "src/main/main.js",
+  "homepage": "./",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:main\"",
+    "dev:renderer": "vite",
+    "dev:main": "electron src/main/main.js",
+    "build": "vite build",
+    "build:main": "electron-builder",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint src/",
+    "format": "prettier --write src/"
+  },
+  "keywords": ["electron", "react", "voice", "interview", "claude"],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.5.0",
+    "@vitejs/plugin-react": "^4.1.0",
+    "concurrently": "^8.2.0",
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.0",
+    "eslint": "^8.50.0",
+    "eslint-plugin-react": "^7.33.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "prettier": "^3.0.0",
+    "vite": "^4.4.0"
+  },
+  "dependencies": {
+    "@google-cloud/speech": "^6.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "build": {
+    "appId": "com.example.claude-voice-interview",
+    "productName": "Claude Voice Interview",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/main/**/*",
+      "build/**/*",
+      "node_modules/**/*"
+    ]
+  }
+}

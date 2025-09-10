@@ -1,0 +1,386 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-header h1 {
+  font-size: 1.5rem;
+}
+
+.app-header nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.app-header nav button {
+  background: none;
+  border: 1px solid #34495e;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.app-header nav button:hover {
+  background-color: #34495e;
+}
+
+.app-header nav button.active {
+  background-color: #3498db;
+  border-color: #3498db;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status-dot.ready {
+  background-color: #27ae60;
+}
+
+.status-dot.not-ready {
+  background-color: #e74c3c;
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.interview-tab {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  height: 100%;
+}
+
+/* Voice Controls */
+.voice-controls {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.voice-controls h2 {
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
+.speech-recognition, .speech-synthesis, .status {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.speech-recognition:last-child, .speech-synthesis:last-child, .status:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.speech-recognition button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.speech-recognition button:hover {
+  background-color: #2980b9;
+}
+
+.speech-recognition button.recording {
+  background-color: #e74c3c;
+  animation: pulse 1.5s infinite;
+}
+
+.speech-recognition button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.transcript {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: #ecf0f1;
+  border-radius: 4px;
+  font-style: italic;
+}
+
+.speech-synthesis input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.speech-synthesis button {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.speech-synthesis button:hover {
+  background-color: #219a52;
+}
+
+.speech-synthesis button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+.status p {
+  margin-bottom: 0.5rem;
+}
+
+.status .error {
+  color: #e74c3c;
+}
+
+/* Interview Panel */
+.interview-panel {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.interview-panel h2 {
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
+.start-interview {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.start-interview:hover {
+  background-color: #219a52;
+}
+
+.question-counter {
+  background-color: #3498db;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.current-question {
+  margin-bottom: 1.5rem;
+}
+
+.current-question h3 {
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.current-question p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-left: 4px solid #3498db;
+  border-radius: 4px;
+}
+
+.interview-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.interview-controls button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.interview-controls button:hover {
+  background-color: #f8f9fa;
+}
+
+.interview-controls button:disabled {
+  background-color: #f8f9fa;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.stop-interview {
+  background-color: #e74c3c !important;
+  color: white !important;
+  border-color: #e74c3c !important;
+}
+
+.stop-interview:hover {
+  background-color: #c0392b !important;
+}
+
+.interview-instructions {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 4px;
+  border-left: 4px solid #f39c12;
+}
+
+.interview-instructions ul {
+  list-style-position: inside;
+  margin-top: 0.5rem;
+}
+
+.interview-instructions li {
+  margin-bottom: 0.25rem;
+}
+
+/* Settings Panel */
+.settings-panel {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  max-width: 600px;
+}
+
+.settings-panel h2 {
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
+.provider-selection, .local-settings, .cloud-settings, .current-status {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.provider-selection:last-child, .local-settings:last-child, .cloud-settings:last-child, .current-status:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.radio-group label:hover {
+  background-color: #f8f9fa;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.cloud-settings button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.cloud-settings button:hover {
+  background-color: #2980b9;
+}
+
+.provider-info {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.current-status pre {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  overflow-x: auto;
+}
